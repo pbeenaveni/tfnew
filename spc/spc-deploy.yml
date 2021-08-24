@@ -3,6 +3,10 @@
   hosts: appserver
   become: yes
   tasks:
+    - name: fail if other distrubution
+      fail:
+        msg: "This is not Ubuntu dist"
+      when: ansible_distribution != "Ubuntu"
     - name: install packages
       apt: 
         name: "{{ java_package }}"
