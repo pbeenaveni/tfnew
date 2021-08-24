@@ -41,11 +41,11 @@
         daemon_reload: yes
         enabled: yes
         state: 'started'
-handlers:
-  - name: debug message for java
+  handlers:
+    - name: debug message for java
       debug:
         msg: "java with package {{ java_package }} is installed"
 
-  - name: debug message for directory creation
+    - name: debug message for directory creation
       debug:
         msg: "Directory created at {{ app_dir }}"
