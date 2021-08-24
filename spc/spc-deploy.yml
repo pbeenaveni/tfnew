@@ -26,11 +26,10 @@
     - name: download application
       get_url:
         url: {{ download_app }}
-}}
         dest: {{ app_file }}
     - name: Necesary permissions to a file
       file:
-        path: {{ app_file }}
+        path: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
         owner: {{ app_user }}
         mode: '500'
         state: file
