@@ -2,29 +2,36 @@
 - name: Spring boot depoy
   hosts: appserver
   become: yes
+  vars:
+    java_package: openjdk-11-jdk
+    app_user: springbootuser 
+    app_dir: /usr/share/springpetclinic
+    download_app: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+    app_file: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
   tasks:
     - name: install packages
       apt: 
-        name: openjdk-11-jdk
+        name: {{ java_package }}
         update_cache: yes
         state: present
     - name: adding springboot user
       user:
-        name: springbootuser 
-        password: springbootuser
+        name: {{ app_user }} 
+        password: {{ app_user }}
         state: present       
     - name: make directory
       file: 
-        path: /usr/share/springpetclinic
+        path: {{ app_dir }}
         state: directory
     - name: download application
       get_url:
-        url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
-        dest: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+        url: {{ download_app }}
+}}
+        dest: {{ app_file }}
     - name: Necesary permissions to a file
       file:
-        path: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
-        owner: springbootuser
+        path: {{ app_file }}
+        owner: {{ app_user }}
         mode: '500'
         state: file
     - name: copying service file
