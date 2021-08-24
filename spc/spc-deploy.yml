@@ -11,26 +11,26 @@
   tasks:
     - name: install packages
       apt: 
-        name: {{ java_package }}
+        name: "{{ java_package }}"
         update_cache: yes
         state: present
     - name: adding springboot user
       user:
-        name: {{ app_user }} 
-        password: {{ app_user }}
+        name: "{{ app_user }}" 
+        password: "{{ app_user }}"
         state: present       
     - name: make directory
       file: 
-        path: {{ app_dir }}
+        path: "{{ app_dir }}"
         state: directory
     - name: download application
       get_url:
-        url: {{ download_app }}
-        dest: {{ app_file }}
+        url: "{{ download_app }}"
+        dest: "{{ app_file }}"
     - name: Necesary permissions to a file
       file:
         path: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
-        owner: {{ app_user }}
+        owner: "{{ app_user }}"
         mode: '500'
         state: file
     - name: copying service file
