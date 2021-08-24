@@ -33,8 +33,10 @@
         dest: /etc/systemd/system/springpetclinic.service
     - name: systemctl commands 
       systemd:
+        name: 'springpetclinic'
         daemon_reload: yes
         enabled: yes
+        state: 'started'
         
 
 
