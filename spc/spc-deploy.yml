@@ -8,13 +8,17 @@
         name: openjdk-11-jdk
         update_cache: yes
         state: present
+    - name: adding springboot user
+      user:
+        name: springbootuser        
     - name: make necessary files
       file: 
         path: /usr/share/springpetclinic
+        state: directory
+        owner: springbootuser
+        mode: 500
     - name: download application
       get_url:
         url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
         dest: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
-    - name: adding springboot user
-      user:
-        name: springbootuser
+
