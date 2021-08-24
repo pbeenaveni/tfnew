@@ -3,14 +3,13 @@
   hosts: appserver
   become: yes
   tasks:
-    - name: debug java package
-      debug:
-        var: java_package
     - name: install packages
       apt: 
         name: "{{ java_package }}"
         update_cache: yes
         state: present
+      notify:
+        - debug message for java
     - name: adding springboot user
       user:
         name: "{{ app_user }}" 
@@ -20,6 +19,8 @@
       file: 
         path: "{{ app_dir }}"
         state: directory
+      notify: 
+        - debug message for directory creation
     - name: download application
       get_url:
         url: "{{ download_app }}"
@@ -40,8 +41,11 @@
         daemon_reload: yes
         enabled: yes
         state: 'started'
-        
+handlers:
+  - name: debug message for java
+      debug:
+        msg: "java with package {{ java_package }} is installed"
 
-
-    
-
+  - name: debug message for directory creation
+      debug:
+        msg: "Directory created at {{ app_dir }}"
