@@ -2,5 +2,5 @@
 localhost
 172.31.40.2
 
-[debian]
+[appserver]
 172.31.40.2

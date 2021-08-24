@@ -1,6 +1,6 @@
 ---
 - name: Spring boot depoy
-  hosts: debian
+  hosts: appserver
   become: yes
   tasks:
     - name: install packages
