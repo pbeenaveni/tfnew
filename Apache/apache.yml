@@ -20,8 +20,8 @@
       loop: "{{ php_packages }}"
     - name: To copy info php file
         copy: 
-          src: info.php
           dest: "{{ php_dest }}"
+          src: "info.php"
         notify:
           - copying the php file
           - ensure service restarted
