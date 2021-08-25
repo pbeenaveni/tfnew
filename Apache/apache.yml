@@ -18,12 +18,12 @@
         name: "{{ item }}"
         state: present
       loop: "{{ php_packages }}"
-    - name: copy info php file
+    - name: To copy info php file
         copy: 
           src: info.php
           dest: "{{ php_dest }}"
         notify:
-          - copy the php file
+          - copying the php file
           - ensure service restarted
     - name: ensure service is running
         systemd:
@@ -34,7 +34,7 @@
     - name: Installed httpd package
         debug: 
           msg: "{{ httpd_package }} is successsfully installed"
-    - name: copy the php file
+    - name: copying the php file
         debug: 
           msg: " {{ php_dest }} is succesfully copied"
     - name: ensure service restarted
