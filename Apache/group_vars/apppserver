@@ -1,0 +1,3 @@
+---
+php_file: info.php
+php_dest: /var/www/html/info.php

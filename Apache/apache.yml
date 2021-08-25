@@ -1,0 +1,46 @@
+---
+- name: Installing Apache and PHP packages
+  hosts: appserver
+  become: yes
+  tasks:
+    - name: fail if other distrubution
+      fail:
+        msg: "This is not Ubuntu or CentOS dist"
+      when: ansible_distribution != "Ubuntu"  and ansible_distribution != "CentOS"
+    - name: Install httpd packages
+      package: 
+        name: "{{ httpd_package }}"
+        state: present
+      notify:
+        - Installed httpd package
+    - name: Install php packages 
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ php_packages }}"
+    - name: copy info php file
+        copy: 
+          src: "{{ php_file }}"
+          dest: "{{ php_dest }}"
+        notify:
+          - copy the php file
+          - ensure service restarted
+    - name: ensure service is running
+        systemd:
+          name: {{ httpd_package }}
+          enabled: yes
+          state: started
+  handlers:
+    - name: Installed httpd package
+        debug: 
+          msg: "{{ httpd_package }} is successsfully installed"
+    - name: copy the php file
+        debug: 
+          msg: " {{ php_file }} is succesfully copied"
+    - name: ensure service restarted
+        service: 
+          name: {{ httpd_package }}
+          state: restarted
+          
+        
+  
