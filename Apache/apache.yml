@@ -20,7 +20,7 @@
       loop: "{{ php_packages }}"
     - name: copy info php file
         copy: 
-          src: "{{ php_file }}"
+          src: info.php
           dest: "{{ php_dest }}"
         notify:
           - copy the php file
@@ -36,7 +36,7 @@
           msg: "{{ httpd_package }} is successsfully installed"
     - name: copy the php file
         debug: 
-          msg: " {{ php_file }} is succesfully copied"
+          msg: " {{ php_dest }} is succesfully copied"
     - name: ensure service restarted
         service: 
           name: {{ httpd_package }}
