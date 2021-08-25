@@ -5,12 +5,11 @@
   tasks:
     - name: fail if other distrubution
       fail:
-        msg: "This is not Ubuntu dist"
-      when: ansible_distribution != "Ubuntu"
+        msg: "This is not Ubuntu or CentOS dist"
+      when: ansible_distribution != "Ubuntu"  and ansible_distribution != "CentOS"
     - name: install packages
-      apt: 
+      Package: 
         name: "{{ java_package }}"
-        update_cache: yes
         state: present
       notify:
         - debug message for java
