@@ -1,0 +1,8 @@
+---
+- name: debug message for java
+  debug:
+    msg: "java with package {{ java_package }} is installed"
+
+- name: debug message for directory creation
+  debug:
+    msg: "Directory created at {{ app_dir }}"

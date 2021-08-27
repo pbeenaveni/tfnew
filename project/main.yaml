@@ -1,0 +1,6 @@
+---
+- name: Installing SPC
+  hosts: appserver
+  become: yes
+  roles:
+    - spc

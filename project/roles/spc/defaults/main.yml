@@ -1,0 +1,5 @@
+---
+app_user: springbootuser 
+app_dir: /usr/share/springpetclinic
+download_app: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+app_file: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
