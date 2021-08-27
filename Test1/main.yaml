@@ -1,0 +1,18 @@
+---
+- name: Inport playbook example
+  hosts: appserver
+  become: yes
+  tasks: 
+    - name: import utility packages play
+      import_playbook: test1.yaml
+      vars: 
+        packages:
+          - git
+          - wget
+          - tree
+    - name: import files play
+      import_playbook: test2.yaml
+      vars: 
+        file_name:
+          - /tmp/1.txt
+          - /tmp/2.txt
