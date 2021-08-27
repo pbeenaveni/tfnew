@@ -3,7 +3,7 @@
   hosts: appserver
   become: yes
   tasks: 
-    - name: import utility packages play
+    - name: import utility packag play
       import_playbook: test1.yaml
       vars: 
         packages:
