@@ -1,0 +1,29 @@
+---
+- name: Testing Tags
+  become: yes
+  hosts: appserver
+  vars: 
+    file_name:
+      - /tmp/1.txt
+      - /tmp/2.txt
+    packages:
+      - git
+      - wget
+      - tree
+  tasks: 
+    - name: install packages
+      package: 
+        name: "{{ item }}"
+        state: present 
+      loop: "{{ packages }}"
+      tags:
+      - package
+      - dev
+    - name: Make necesary files
+      file: 
+        dest: "{{ item }}"
+        state: touch
+      loop: "{{ file_name }}"
+      tags:
+      - file
+      - dev
